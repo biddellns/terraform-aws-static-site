@@ -96,7 +96,9 @@ resource "aws_cloudfront_distribution" "cdn" {
       restriction_type = "none"
     }
   }
+
   viewer_certificate {
+    cloudfront_default_certificate = var.cert_arn == "" ? true : false
     acm_certificate_arn = var.cert_arn
     minimum_protocol_version = "TLSv1.2_2019"
     ssl_support_method = "sni-only"
