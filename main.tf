@@ -83,7 +83,7 @@ resource "aws_cloudfront_distribution" "cdn" {
     max_ttl     = var.default_cache_time
     min_ttl     = 0
   }
-  default_root_object = var.default_root_object
+  default_root_object = "index.html"
   is_ipv6_enabled     = true
   origin {
     domain_name = aws_s3_bucket.static_site[0].bucket_regional_domain_name
@@ -122,7 +122,7 @@ resource "aws_lambda_function" "index_html" {
   count = var.enabled ? 1 : 0
 
   filename      = data.archive_file.dummy[0].output_path
-  function_name = "index-html-writer"
+  function_name = "${aws_cloudfront_distribution.cdn.id}-index-html-writer"
   handler       = "exports.handler"
   role          = aws_iam_role.lambda_edge_exec[0].arn
   runtime       = "nodejs12.x"

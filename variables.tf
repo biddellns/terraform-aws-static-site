@@ -11,14 +11,8 @@ variable "provisioner" {
 
 variable "cert_arn" {
   type        = string
-  description = "ARN of ACM cert for cloudfront. Needed until ported to terraform"
+  description = "ARN of ACM cert for cloudfront. If not provided, default Cloudfront cert will be used"
   default     = ""
-}
-
-variable "default_root_object" {
-  type        = string
-  description = "The object that you want CloudFront to return (for example, index.html) when an end user requests the root URL."
-  default     = "index.html"
 }
 
 variable "cloudfront_cname_aliases" {
@@ -30,7 +24,6 @@ variable "cloudfront_cname_aliases" {
 variable "ci_username" {
   type        = string
   description = "Username for CI user for syncing s3 files"
-  default     = ""
 }
 
 variable "default_cache_time" {
