@@ -1,6 +1,6 @@
 resource "aws_iam_user" "static-site-ci" {
   count = var.enabled ? 1 : 0
-  name  = var.ci_username != "" ? var.ci_username : "${aws_s3_bucket.static_site.bucket}-ci-user"
+  name  = var.ci_username != "" ? var.ci_username : "${aws_s3_bucket.static_site[0].bucket}-ci-user"
 }
 
 data "aws_iam_policy_document" "static-site-ci" {
