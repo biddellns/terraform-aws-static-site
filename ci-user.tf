@@ -1,12 +1,14 @@
 resource "aws_iam_user" "static-site-ci" {
   count = var.enabled ? 1 : 0
-  name = var.ci_username
+  name  = var.ci_username
 }
 
 data "aws_iam_policy_document" "static-site-ci" {
+  count = var.enabled ? 1 : 0
+
   statement {
     effect = "Allow"
-    actions   = [
+    actions = [
       "s3:PutObject",
       "s3:DeleteObject"
     ]
@@ -17,7 +19,7 @@ data "aws_iam_policy_document" "static-site-ci" {
 
   statement {
     effect = "Allow"
-    actions   = [
+    actions = [
       "s3:ListBucket"
     ]
     resources = [
@@ -40,13 +42,13 @@ resource "aws_iam_policy" "static-site-ci" {
   count = var.enabled ? 1 : 0
 
   description = "For putting or deleting objects in personal site"
-  name = "Sync-Personal-Site"
-  policy = data.aws_iam_policy_document.static-site-ci.json
+  name        = "Sync-Personal-Site"
+  policy      = data.aws_iam_policy_document.static-site-ci.json
 }
 
 resource "aws_iam_user_policy_attachment" "static-site-ci" {
   count = var.enabled ? 1 : 0
 
   policy_arn = aws_iam_policy.static-site-ci[0].arn
-  user = aws_iam_user.static-site-ci[0].name
+  user       = aws_iam_user.static-site-ci[0].name
 }
