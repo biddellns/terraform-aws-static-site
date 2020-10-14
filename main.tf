@@ -122,7 +122,7 @@ resource "aws_lambda_function" "index_html" {
   count = var.enabled ? 1 : 0
 
   filename      = data.archive_file.dummy[0].output_path
-  function_name = "${aws_cloudfront_distribution.cdn.id}-index-html-writer"
+  function_name = "${aws_s3_bucket.static_site.bucket}-index-html-writer"
   handler       = "exports.handler"
   role          = aws_iam_role.lambda_edge_exec[0].arn
   runtime       = "nodejs12.x"
