@@ -164,11 +164,7 @@ data "aws_iam_policy_document" "lambda-at-edge" {
 data "archive_file" "dummy" {
   count = var.enabled ? 1 : 0
 
+  source_file = "${path.module}/exports.js"
   output_path = "${path.module}/lambda_function_code.zip"
   type        = "zip"
-
-  source {
-    content  = "console.log('Hello World');"
-    filename = "exports.js"
-  }
 }
