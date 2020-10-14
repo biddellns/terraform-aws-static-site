@@ -25,7 +25,7 @@ resource "aws_s3_bucket_policy" "static_site" {
   count = var.enabled ? 1 : 0
 
   bucket = aws_s3_bucket.static_site[0].id
-  policy = data.aws_iam_policy_document.static_site.json
+  policy = data.aws_iam_policy_document.static_site[0].json
 }
 
 data "aws_iam_policy_document" "static_site" {
@@ -121,7 +121,7 @@ resource "aws_cloudfront_origin_access_identity" "static_site_s3" {
 resource "aws_lambda_function" "index_html" {
   count = var.enabled ? 1 : 0
 
-  filename      = data.archive_file.dummy.output_path
+  filename      = data.archive_file.dummy[0].output_path
   function_name = "index-html-writer"
   handler       = "exports.handler"
   role          = aws_iam_role.lambda_edge_exec[0].arn
@@ -136,7 +136,7 @@ resource "aws_lambda_function" "index_html" {
 resource "aws_iam_role" "lambda_edge_exec" {
   count = var.enabled ? 1 : 0
 
-  assume_role_policy = data.aws_iam_policy_document.lambda-at-edge.json
+  assume_role_policy = data.aws_iam_policy_document.lambda-at-edge[0].json
 
   tags = {
     Provisioner = var.provisioner

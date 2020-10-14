@@ -43,7 +43,7 @@ resource "aws_iam_policy" "static-site-ci" {
 
   description = "For putting or deleting objects in personal site"
   name        = "Sync-Personal-Site"
-  policy      = data.aws_iam_policy_document.static-site-ci.json
+  policy      = data.aws_iam_policy_document.static-site-ci[0].json
 }
 
 resource "aws_iam_user_policy_attachment" "static-site-ci" {
