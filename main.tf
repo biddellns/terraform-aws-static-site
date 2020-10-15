@@ -1,7 +1,3 @@
-locals {
-  safe_site_name = replace(aws_s3_bucket.static_site[0].id, "/[.*:!@#$%^&*()+=]/", "_")
-}
-
 resource "aws_s3_bucket" "static_site" {
   count = var.enabled ? 1 : 0
 
@@ -12,6 +8,10 @@ resource "aws_s3_bucket" "static_site" {
   tags = {
     Provisioner = var.provisioner
   }
+}
+
+locals {
+  safe_site_name = replace(aws_s3_bucket.static_site[0].id, "/[.*:!@#$%^&*()+=]/", "_")
 }
 
 resource "aws_s3_bucket_public_access_block" "static_site" {
