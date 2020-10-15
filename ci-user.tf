@@ -42,7 +42,7 @@ resource "aws_iam_policy" "static-site-ci" {
   count = var.enabled ? 1 : 0
 
   description = "For putting or deleting objects in personal site"
-  name        = "Sync-Personal-Site"
+  name        = "${local.safe_site_name}-Sync-Personal-Site"
   policy      = data.aws_iam_policy_document.static-site-ci[0].json
 }
 

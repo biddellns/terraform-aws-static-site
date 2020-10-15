@@ -1,3 +1,7 @@
+locals {
+  safe_site_name = replace(aws_s3_bucket.static_site[0].id, "/[.*:!@#$%^&*()+=]/", "_")
+}
+
 resource "aws_s3_bucket" "static_site" {
   count = var.enabled ? 1 : 0
 
@@ -124,7 +128,7 @@ resource "aws_lambda_function" "index_html" {
   filename = data.archive_file.dummy[0].output_path
 
   // https://www.terraform.io/docs/configuration/functions/replace.html
-  function_name = "${replace(aws_s3_bucket.static_site[0].id, "/[.*:!@#$%^&*()+=]/", "_")}-index-html-writer"
+  function_name = "${local.safe_site_name}-index-html-writer"
   handler       = "exports.handler"
   role          = aws_iam_role.lambda_edge_exec[0].arn
   runtime       = "nodejs12.x"
