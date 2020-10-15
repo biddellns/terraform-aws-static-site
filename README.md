@@ -31,6 +31,6 @@ A terraform for generating a static site with AWS.
 |------|-------------|
 | cdn\_arn | Arn of Cloudfront Distribution serving the static site. |
 | cdn\_domain\_name | URL of Cloudfront Distribution serving the static site. |
-| ci-user | ARN of user with IAM permissions to sync files with s3\_bucket |
+| ci\_user | ARN of user with IAM permissions to sync files with s3\_bucket |
 | index\_html\_rewriter\_lambda | ARN of Lambda ensuring urls end in /index.html if no filename is in request |
 | s3\_bucket\_arn | ARN of S3 bucket holding the site html/css/js and other assets. |

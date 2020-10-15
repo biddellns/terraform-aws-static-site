@@ -17,7 +17,7 @@ output "index_html_rewriter_lambda" {
   description = "ARN of Lambda ensuring urls end in /index.html if no filename is in request"
 }
 
-output "ci-user" {
+output "ci_user" {
   value       = var.enabled ? aws_iam_user.static-site-ci[0].arn : ""
   description = "ARN of user with IAM permissions to sync files with s3_bucket"
 }
