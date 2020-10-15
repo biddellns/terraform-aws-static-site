@@ -1,9 +1,8 @@
-module "test_site" {
-  source  = "biddellns/static-site/aws"
-  version = "v1.x.x"
+module "minimal_site" {
+  source  = "../.."
 
   enabled = true
 
-  bucket_name = "domainless-website"
-  ci_username = "domainless-website-ci"
+  bucket_name = "minimal-static-site"
+  ci_username = "minimal-static-site-ci"
 }
