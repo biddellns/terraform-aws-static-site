@@ -1,5 +1,7 @@
 # terraform-aws-static-site
-A terraform for generating a static site with AWS.
+A terraform module for generating secure static site infrastructure in AWS.
+
+Design decisions detailed here: https://nicbiddell.com/blog/cloudfront-private-s3-and-gatsby/
 
 ## Benefits
 - Served by Cloudfront CDN
