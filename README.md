@@ -1,5 +1,5 @@
-# terraform-aws-static-site
-A terraform module for generating secure static site infrastructure in AWS.
+# Terraform AWS Static Site
+A terraform module for generating secure static site infrastructure in AWS with S3, Cloudfront, and Lambda.
 
 Design decisions detailed here: https://nicbiddell.com/blog/cloudfront-private-s3-and-gatsby/
 
