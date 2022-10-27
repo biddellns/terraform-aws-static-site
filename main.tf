@@ -131,7 +131,7 @@ resource "aws_lambda_function" "index_html" {
   function_name = "${local.safe_site_name}-index-html-writer"
   handler       = "exports.handler"
   role          = aws_iam_role.lambda_edge_exec[0].arn
-  runtime       = "nodejs12.x"
+  runtime       = "nodejs16.x"
   publish       = true
 
   tags = {
